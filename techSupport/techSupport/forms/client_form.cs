@@ -53,6 +53,16 @@ namespace techSupport.forms
             {
                 RefreshTable();
                 MessageBox.Show("Запись успешно добавлена!", "Успех!");
+
+                if ((dataGridView1.Rows.Count - 1) < 0)
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
+                }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[1];
+                    SubRefresh();
+                }
             }
         }
 
@@ -61,10 +71,21 @@ namespace techSupport.forms
             client_edit F2 = new client_edit();
             F2.Text = "Редактирование клиента";
             F2.IDCHANGE = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
+            var m_curentCell = dataGridView1.CurrentCell.RowIndex;
+
             if (F2.ShowDialog() == DialogResult.OK)
             {
                 RefreshTable();
                 MessageBox.Show("Запись успешно изменена!", "Успех!");
+                if ((dataGridView1.Rows.Count - 1) < 0)
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
+                }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[m_curentCell].Cells[1];
+                    SubRefresh();
+                }
             }
         }
 
@@ -131,17 +152,18 @@ namespace techSupport.forms
         {
             if (MessageBox.Show("Вы действительно хотите удалить запись?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                try
-                {
-                    SqlCommand command = new SqlCommand($"DELETE FROM User2Product WHERE id = {dataGridView2.Rows[dataGridView2.CurrentCell.RowIndex].Cells[0].Value}", sqlConnection);
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Запись успешно удалена!", "Успех!");
-                    RefreshTable();
+                SqlCommand command = new SqlCommand($"DELETE FROM User2Product WHERE id = {dataGridView2.Rows[dataGridView2.CurrentCell.RowIndex].Cells[0].Value}", sqlConnection);
+                try 
+                { 
+                    command.ExecuteNonQuery(); 
                 }
-                catch
+                catch 
                 {
                     MessageBox.Show("Ошибка, попробуйте еще раз!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
+                MessageBox.Show("Запись успешно удалена!", "Успех!");
+                RefreshTable();
             }
         }
 
@@ -149,8 +171,29 @@ namespace techSupport.forms
         {
             if (new product_edit_client((int)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value).ShowDialog() == DialogResult.OK)
             {
+                var m_currentIndex = dataGridView1.CurrentCell.RowIndex;
                 RefreshTable();
-                MessageBox.Show("Продукт успешно добавлен!", "Успех!");
+                MessageBox.Show("Запись успешно добавлена!", "Успех!");
+
+                if ((dataGridView1.Rows.Count - 1) < 0)
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
+                }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[m_currentIndex].Cells[1];
+                    SubRefresh();
+
+                    if ((dataGridView2.Rows.Count - 1) < 0)
+                    {
+                        dataGridView2.CurrentCell = dataGridView2.Rows[0].Cells[1];
+                    }
+                    else
+                    {
+                        dataGridView2.CurrentCell = dataGridView2.Rows[dataGridView2.Rows.Count - 1].Cells[1];
+                        DogovorRefresh();
+                    }
+                }
             }
         }
 
@@ -161,8 +204,30 @@ namespace techSupport.forms
             F2.IDCHANGE = dataGridView2.Rows[dataGridView2.CurrentCell.RowIndex].Cells[0].Value.ToString();
             if (F2.ShowDialog() == DialogResult.OK)
             {
+                var m_currentIndex = dataGridView1.CurrentCell.RowIndex;
+                var s_currentIndex = dataGridView2.CurrentCell.RowIndex;
                 RefreshTable();
                 MessageBox.Show("Запись успешно изменена!", "Успех!");
+
+                if ((dataGridView1.Rows.Count - 1) < 0)
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
+                }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[m_currentIndex].Cells[1];
+                    SubRefresh();
+
+                    if ((dataGridView2.Rows.Count - 1) < 0)
+                    {
+                        dataGridView2.CurrentCell = dataGridView2.Rows[0].Cells[1];
+                    }
+                    else
+                    {
+                        dataGridView2.CurrentCell = dataGridView2.Rows[s_currentIndex].Cells[1];
+                        DogovorRefresh();
+                    }
+                }
             }
         }
 
@@ -183,10 +248,17 @@ namespace techSupport.forms
                 {
                     DataTable dataTable = new DataTable();
                     adapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count == 0)
+                    {
+                        return;
+                    }
+
                     prod_id = (int)dataTable.Rows[0][2];
                 }
 
-                string query = $"SELECT Treaty.id, ('Договор' + ' №' + convert(nvarchar(max), Treaty.nomer, 0) + ' ' + '|' + ' ' + convert(nvarchar(max), Treaty.dateСonclusion, 0) + ' ' + '(' + convert(nvarchar(max), Treaty.dataFrom, 0) + ' - ' + convert(nvarchar(max), Treaty.dateTo, 0) + ')') AS [Договор] FROM Treaty, Clients, Products, User2Product WHERE Treaty.client = Clients.id AND Treaty.product = Products.id AND User2Product.client = Treaty.client AND User2Product.product = Treaty.product AND Clients.id = {client_id} AND Products.id = {prod_id}";
+                //string query = $"SELECT Treaty.id, ('Договор' + ' №' + convert(nvarchar(max), Treaty.nomer, 0) + ' ' + '|' + ' ' + convert(nvarchar(max), Treaty.dateСonclusion, 0) + ' ' + '(' + convert(nvarchar(max), Treaty.dataFrom, 0) + ' - ' + convert(nvarchar(max), Treaty.dateTo, 0) + ')') AS [Договор] FROM Treaty, Clients, Products, User2Product WHERE Treaty.client = Clients.id AND Treaty.product = Products.id AND User2Product.client = Treaty.client AND User2Product.product = Treaty.product AND Clients.id = {client_id} AND Products.id = {prod_id}";
+                string query = $"SELECT Treaty.id, ('Договор' + ' №' + convert(nvarchar(max), Treaty.nomer, 0) + ' ' + '|' + ' ' + convert(nvarchar(max), Treaty.dateСonclusion, 0) + ' ' + '(' + convert(nvarchar(max), Treaty.dataFrom, 0) + ' - ' + convert(nvarchar(max), Treaty.dateTo, 0) + ')') AS [Договор] FROM Treaty, Clients, Products, User2Product WHERE Treaty.client = Clients.id AND Treaty.product = Products.id AND User2Product.client = Treaty.client AND User2Product.product = Treaty.product AND Clients.id = {client_id} AND Products.id = {prod_id} ORDER BY Treaty.id DESC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString))
                 {
                     DataTable dataTable = new DataTable();
@@ -214,8 +286,38 @@ namespace techSupport.forms
 
             if (new dogovor2_edit(client_id, prod_id).ShowDialog() == DialogResult.OK)
             {
+                var m_currentIndex = dataGridView1.CurrentCell.RowIndex;
+                var s_currentIndex = dataGridView2.CurrentCell.RowIndex;
                 RefreshTable();
                 MessageBox.Show("Продукт успешно добавлен!", "Успех!");
+                if ((dataGridView1.Rows.Count - 1) < 0)
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
+                }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[m_currentIndex].Cells[1];
+                    SubRefresh();
+
+                    if ((dataGridView2.Rows.Count - 1) < 0)
+                    {
+                        dataGridView2.CurrentCell = dataGridView2.Rows[0].Cells[1];
+                    }
+                    else
+                    {
+                        dataGridView2.CurrentCell = dataGridView2.Rows[dataGridView2.Rows.Count - 1].Cells[1];
+                        DogovorRefresh();
+
+                        if ((dataGridView3.Rows.Count - 1) < 0)
+                        {
+                            dataGridView3.CurrentCell = dataGridView3.Rows[0].Cells[1];
+                        }
+                        else
+                        {
+                            dataGridView3.CurrentCell = dataGridView3.Rows[0].Cells[1];
+                        }
+                    }
+                }
             }
         }
 
@@ -257,8 +359,39 @@ namespace techSupport.forms
             F2.IDCHANGE = dataGridView3.Rows[dataGridView3.CurrentCell.RowIndex].Cells[0].Value.ToString();
             if (F2.ShowDialog() == DialogResult.OK)
             {
+                var m_currentIndex = dataGridView1.CurrentCell.RowIndex;
+                var s_currentIndex = dataGridView2.CurrentCell.RowIndex;
+                var x_currentIndex = dataGridView3.CurrentCell.RowIndex;
                 RefreshTable();
                 MessageBox.Show("Запись успешно изменена!", "Успех!");
+                if ((dataGridView1.Rows.Count - 1) < 0)
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
+                }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[m_currentIndex].Cells[1];
+                    SubRefresh();
+
+                    if ((dataGridView2.Rows.Count - 1) < 0)
+                    {
+                        dataGridView2.CurrentCell = dataGridView2.Rows[0].Cells[1];
+                    }
+                    else
+                    {
+                        dataGridView2.CurrentCell = dataGridView2.Rows[dataGridView2.Rows.Count - 1].Cells[1];
+                        DogovorRefresh();
+
+                        if ((dataGridView3.Rows.Count - 1) < 0)
+                        {
+                            dataGridView3.CurrentCell = dataGridView3.Rows[0].Cells[1];
+                        }
+                        else
+                        {
+                            dataGridView3.CurrentCell = dataGridView3.Rows[x_currentIndex].Cells[1];
+                        }
+                    }
+                }
             }
         }
 
@@ -416,6 +549,55 @@ namespace techSupport.forms
             if (F2.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show("Настройки успешно изменены!", "Успех!");
+            }
+        }
+
+        private void SubRefresh() 
+        {
+            if (dataGridView1.CurrentCell != null)
+            {
+                string query = $"SELECT User2Product.id, Products.name AS [Название продукта] FROM Products, User2Product, Clients WHERE User2Product.client = Clients.id AND User2Product.product = Products.id AND Clients.id = '{dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString()}'";
+                var connectionString = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString))
+                {
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    dataGridView2.DataSource = dataTable;
+                }
+                dataGridView2.Columns[0].Visible = false;
+                DogovorRefresh();
+            }
+        }
+
+        private void DogovorRefresh()
+        {
+            int client_id = (int)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value;
+
+            int user2prod_id;
+
+            if (dataGridView2.CurrentCell != null)
+            {
+                user2prod_id = (int)dataGridView2.Rows[dataGridView2.CurrentCell.RowIndex].Cells[0].Value;
+                int prod_id;
+
+                string query2 = $"SELECT * FROM User2Product WHERE id = {user2prod_id}";
+                var connectionString = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query2, connectionString))
+                {
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    prod_id = (int)dataTable.Rows[0][2];
+                }
+
+                //string query = $"SELECT Treaty.id, ('Договор' + ' №' + convert(nvarchar(max), Treaty.nomer, 0) + ' ' + '|' + ' ' + convert(nvarchar(max), Treaty.dateСonclusion, 0) + ' ' + '(' + convert(nvarchar(max), Treaty.dataFrom, 0) + ' - ' + convert(nvarchar(max), Treaty.dateTo, 0) + ')') AS [Договор] FROM Treaty, Clients, Products, User2Product WHERE Treaty.client = Clients.id AND Treaty.product = Products.id AND User2Product.client = Treaty.client AND User2Product.product = Treaty.product AND Clients.id = {client_id} AND Products.id = {prod_id}";
+                string query = $"SELECT Treaty.id, ('Договор' + ' №' + convert(nvarchar(max), Treaty.nomer, 0) + ' ' + '|' + ' ' + convert(nvarchar(max), Treaty.dateСonclusion, 0) + ' ' + '(' + convert(nvarchar(max), Treaty.dataFrom, 0) + ' - ' + convert(nvarchar(max), Treaty.dateTo, 0) + ')') AS [Договор] FROM Treaty, Clients, Products, User2Product WHERE Treaty.client = Clients.id AND Treaty.product = Products.id AND User2Product.client = Treaty.client AND User2Product.product = Treaty.product AND Clients.id = {client_id} AND Products.id = {prod_id} ORDER BY Treaty.id DESC";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString))
+                {
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    dataGridView3.DataSource = dataTable;
+                }
+                dataGridView3.Columns[0].Visible = false;
             }
         }
     }

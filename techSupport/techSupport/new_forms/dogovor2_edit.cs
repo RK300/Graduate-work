@@ -51,7 +51,14 @@ namespace techSupport.new_forms
             {
                 System.Data.DataTable dataTable = new System.Data.DataTable();
                 adapter.Fill(dataTable);
-                int m_Number = (int)dataTable.Rows[0][0] + 1;
+
+                int m_Number = 1;
+                try 
+                {
+                    m_Number = (int)dataTable.Rows[0][0] + 1;
+                }
+                catch (Exception ex) { }
+                
                 textBox2.Text = m_Number.ToString();
             }
         }

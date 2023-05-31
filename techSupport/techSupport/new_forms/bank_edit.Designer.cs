@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -42,7 +43,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -71,6 +71,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Банк";
             // 
+            // maskedTextBox2
+            // 
+            this.maskedTextBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
+            this.maskedTextBox2.Font = new System.Drawing.Font("Jost", 9.75F);
+            this.maskedTextBox2.Location = new System.Drawing.Point(6, 161);
+            this.maskedTextBox2.Mask = "000000000";
+            this.maskedTextBox2.Name = "maskedTextBox2";
+            this.maskedTextBox2.Size = new System.Drawing.Size(427, 26);
+            this.maskedTextBox2.TabIndex = 54;
+            // 
             // iconPictureBox2
             // 
             this.iconPictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -90,7 +100,6 @@
             // comboBox2
             // 
             this.comboBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBox2.Font = new System.Drawing.Font("Jost", 9.75F);
             this.comboBox2.FormattingEnabled = true;
@@ -98,6 +107,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(427, 27);
             this.comboBox2.TabIndex = 36;
+            this.comboBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox2_KeyPress);
             // 
             // textBox4
             // 
@@ -230,16 +240,6 @@
             this.button2.Text = "Сохранить";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // maskedTextBox2
-            // 
-            this.maskedTextBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
-            this.maskedTextBox2.Font = new System.Drawing.Font("Jost", 9.75F);
-            this.maskedTextBox2.Location = new System.Drawing.Point(6, 161);
-            this.maskedTextBox2.Mask = "000000000";
-            this.maskedTextBox2.Name = "maskedTextBox2";
-            this.maskedTextBox2.Size = new System.Drawing.Size(427, 26);
-            this.maskedTextBox2.TabIndex = 54;
             // 
             // bank_edit
             // 

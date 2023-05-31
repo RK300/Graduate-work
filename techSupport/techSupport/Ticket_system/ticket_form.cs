@@ -84,6 +84,16 @@ namespace techSupport.Ticket_system
                 RefreshTable();
                 rjRadioButton1.Checked = true;
                 MessageBox.Show("Запись успешно добавлена!", "Успех!");
+
+                if ((dataGridView1.Rows.Count - 2) < 0)
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
+                }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.Rows.Count - 2].Cells[1];
+                    SubRefresh();
+                }
             }
         }
 
@@ -92,11 +102,21 @@ namespace techSupport.Ticket_system
             ticket_edit F2 = new ticket_edit(UserId);
             F2.Text = "Редактирование тикета";
             F2.IDCHANGE = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
+            var m_curentCell = dataGridView1.CurrentCell.RowIndex;
             if (F2.ShowDialog() == DialogResult.OK)
             {
                 RefreshTable();
                 rjRadioButton1.Checked = true;
                 MessageBox.Show("Запись успешно изменена!", "Успех!");
+                if ((dataGridView1.Rows.Count - 1) < 0)
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
+                }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[m_curentCell].Cells[1];
+                    SubRefresh();
+                }
             }
         }
 
@@ -321,6 +341,50 @@ namespace techSupport.Ticket_system
                     RefreshTable3();
                 }
             }
+
+            if (rjRadioButton6.Checked)
+            {
+                if (!String.IsNullOrWhiteSpace(textBox1.Text))
+                {
+                    string query = $"SELECT Ticket.id, Clients.CompanyName AS [Клиент], Products.name AS [Продукт], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.status != 'Закрыт' AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id AND Clients.CompanyName + ' ' + Products.name + ' ' + Type.name + ' ' + Ticket.header + ' ' + Ticket.description + ' ' + Ticket.priority + ' ' + Ticket.status LIKE '%{textBox1.Text}%' ORDER BY Ticket.completion_data ASC";
+                    var connectionString = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString))
+                    {
+                        System.Data.DataTable dataTable = new System.Data.DataTable();
+                        adapter.Fill(dataTable);
+                        dataGridView1.DataSource = dataTable;
+                    }
+
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                    {
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    RefreshTable6();
+                }
+            }
         }
 
         private void rjButton4_Click(object sender, EventArgs e)
@@ -360,9 +424,29 @@ namespace techSupport.Ticket_system
         {
             if (new charge_edit((int)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value).ShowDialog() == DialogResult.OK)
             {
+                var m_currentIndex = dataGridView1.CurrentCell.RowIndex;
                 RefreshTable();
                 rjRadioButton1.Checked = true;
-                MessageBox.Show("Продукт успешно добавлен!", "Успех!");
+                MessageBox.Show("Запись успешно добавлена!", "Успех!");
+
+                if ((dataGridView1.Rows.Count - 1) < 0)
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
+                }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[m_currentIndex].Cells[1];
+                    SubRefresh();
+
+                    if ((dataGridView2.Rows.Count - 1) < 0)
+                    {
+                        dataGridView2.CurrentCell = dataGridView2.Rows[0].Cells[1];
+                    }
+                    else
+                    {
+                        dataGridView2.CurrentCell = dataGridView2.Rows[dataGridView2.Rows.Count - 1].Cells[1];
+                    }
+                }
             }
         }
 
@@ -373,9 +457,30 @@ namespace techSupport.Ticket_system
             F2.IDCHANGE = dataGridView2.Rows[dataGridView2.CurrentCell.RowIndex].Cells[0].Value.ToString();
             if (F2.ShowDialog() == DialogResult.OK)
             {
+                var m_currentIndex = dataGridView1.CurrentCell.RowIndex;
+                var s_currentIndex = dataGridView2.CurrentCell.RowIndex;
                 RefreshTable();
                 rjRadioButton1.Checked = true;
                 MessageBox.Show("Запись успешно изменена!", "Успех!");
+
+                if ((dataGridView1.Rows.Count - 1) < 0)
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
+                }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[m_currentIndex].Cells[1];
+                    SubRefresh();
+
+                    if ((dataGridView2.Rows.Count - 1) < 0)
+                    {
+                        dataGridView2.CurrentCell = dataGridView2.Rows[0].Cells[1];
+                    }
+                    else
+                    {
+                        dataGridView2.CurrentCell = dataGridView2.Rows[s_currentIndex].Cells[1];
+                    }
+                }
             }
         }
 
@@ -710,6 +815,7 @@ namespace techSupport.Ticket_system
                     }
                 }
             }
+
             if (rjRadioButton4.Checked == true)
             {
                 for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
@@ -737,6 +843,7 @@ namespace techSupport.Ticket_system
                     }
                 }
             }
+
             if (rjRadioButton5.Checked == true)
             {
                 for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
@@ -750,6 +857,7 @@ namespace techSupport.Ticket_system
                     }
                 }
             }
+
             if (rjRadioButton2.Checked == true)
             {
                 for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
@@ -777,6 +885,7 @@ namespace techSupport.Ticket_system
                     }
                 }
             }
+
             if (rjRadioButton3.Checked == true)
             {
                 for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
@@ -784,6 +893,34 @@ namespace techSupport.Ticket_system
                     for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
                     {
                         this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                    }
+                }
+            }
+
+            if (rjRadioButton6.Checked == true) 
+            {
+                for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                {
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
+                    {
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                        }
+                    }
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
+                    {
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                        }
+                    }
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                    {
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                        }
                     }
                 }
             }
@@ -835,9 +972,29 @@ namespace techSupport.Ticket_system
         {
             if (new file_edit((int)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value).ShowDialog() == DialogResult.OK)
             {
+                var m_currentIndex = dataGridView1.CurrentCell.RowIndex;
                 RefreshTable();
                 rjRadioButton1.Checked = true;
                 MessageBox.Show("Продукт успешно добавлен!", "Успех!");
+
+                if ((dataGridView1.Rows.Count - 1) < 0)
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
+                }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[m_currentIndex].Cells[1];
+                    SubRefresh();
+
+                    if ((dataGridView3.Rows.Count - 1) < 0)
+                    {
+                        dataGridView3.CurrentCell = dataGridView3.Rows[0].Cells[2];
+                    }
+                    else
+                    {
+                        dataGridView3.CurrentCell = dataGridView3.Rows[dataGridView3.Rows.Count - 1].Cells[2];
+                    }
+                }
             }
         }
 
@@ -848,9 +1005,118 @@ namespace techSupport.Ticket_system
             F2.IDCHANGE = dataGridView3.Rows[dataGridView3.CurrentCell.RowIndex].Cells[0].Value.ToString();
             if (F2.ShowDialog() == DialogResult.OK)
             {
+                var m_currentIndex = dataGridView1.CurrentCell.RowIndex;
+                var s_currentIndex = dataGridView3.CurrentCell.RowIndex;
                 RefreshTable();
                 rjRadioButton1.Checked = true;
                 MessageBox.Show("Запись успешно изменена!", "Успех!");
+
+                if ((dataGridView1.Rows.Count - 1) < 0)
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
+                }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[m_currentIndex].Cells[1];
+                    SubRefresh();
+
+                    if ((dataGridView3.Rows.Count - 1) < 0)
+                    {
+                        dataGridView3.CurrentCell = dataGridView3.Rows[0].Cells[2];
+                    }
+                    else
+                    {
+                        dataGridView3.CurrentCell = dataGridView3.Rows[s_currentIndex].Cells[2];
+                    }
+                }
+            }
+        }
+
+        private void RefreshTable6()
+        {
+            string query = "SELECT Ticket.id, Clients.CompanyName AS [Клиент], Products.name AS [Продукт], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.status != 'Закрыт' AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id ORDER BY Ticket.completion_data ASC";
+            var connectionString = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString))
+            {
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+                adapter.Fill(dataTable);
+                dataGridView1.DataSource = dataTable;
+            }
+            dataGridView1.Columns[0].Visible = false;
+
+            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+            {
+                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
+                {
+                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    {
+                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                    }
+                }
+                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
+                {
+                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    {
+                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                    }
+                }
+                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                {
+                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    {
+                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                    }
+                }
+            }
+        }
+
+        private void rjRadioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rjRadioButton6.Checked)
+            {
+                RefreshTable6();
+                
+                label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
+                pictureBox6.Visible = false; pictureBox5.Visible = false;
+                
+                label5.Visible = false;
+                label4.Visible = true; label3.Visible = false; label2.Visible = true; label1.Visible = true;
+                pictureBox4.Visible = true; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
+                
+                label4.Text = "Выбранная запись";
+                pictureBox4.BackColor = SystemColors.Highlight;
+                
+                label2.Text = "Статус - \"Открыт\"";
+                pictureBox2.BackColor = UIColors.SpecGreen;
+                
+                label1.Text = "Статус - \"В работе\"";
+                pictureBox1.BackColor = UIColors.SpecYellow;
+            }
+        }
+
+        private void SubRefresh() 
+        {
+            if (dataGridView1.CurrentCell != null)
+            {
+                string query2 = $"SELECT Charge.id, (Worker.surname + ' ' + Worker.name + ' ' + Worker.patronymic) AS [Сотрудник], Charge.charge AS [Изменения], Charge.update_date AS [Дата изменения] FROM Worker, Charge, Ticket WHERE Charge.worker = Worker.id AND Charge.ticket = Ticket.id AND Ticket.id = '{dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString()}'";
+                var connectionString2 = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query2, connectionString2))
+                {
+                    System.Data.DataTable dataTable = new System.Data.DataTable();
+                    adapter.Fill(dataTable);
+                    dataGridView2.DataSource = dataTable;
+                }
+                dataGridView2.Columns[0].Visible = false;
+
+                string query = $"SELECT ImageFiles.id, File2Tiket.id, ImageFiles.image AS [Изображение] FROM ImageFiles, File2Tiket WHERE ImageFiles.id = File2Tiket.photo AND File2Tiket.ticket = '{dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString()}'";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString2))
+                {
+                    System.Data.DataTable dataTable = new System.Data.DataTable();
+                    adapter.Fill(dataTable);
+                    dataGridView3.DataSource = dataTable;
+                }
+                dataGridView3.Columns[0].Visible = false;
+                dataGridView3.Columns[1].Visible = false;
             }
         }
     }

@@ -60,11 +60,14 @@ namespace WordHelperClass
                         ReplaceWith: missing, Replace: replace);
                 }
 
-                Object newFileName = System.IO.Path.Combine(_fileInfo.DirectoryName, DateTime.Now.ToString("yyyy.MM.dd HH-mm") + ' ' + _fileInfo.Name);
+                string testpath = System.IO.Path.Combine(_fileInfo.DirectoryName, DateTime.Now.ToString("yyyy.MM.dd HH-mm") + ' ' + _fileInfo.Name);
+                //Object newFileName = System.IO.Path.Combine(_fileInfo.DirectoryName, DateTime.Now.ToString("yyyy.MM.dd HH-mm") + ' ' + _fileInfo.Name);
+
+                Object newFileName = testpath;
                 app.ActiveDocument.SaveAs2(newFileName);
                 app.ActiveDocument.Close();
 
-                System.Diagnostics.Process.Start(System.IO.Path.Combine(_fileInfo.DirectoryName, DateTime.Now.ToString("yyyy.MM.dd HH-mm") + ' ' + _fileInfo.Name));
+                System.Diagnostics.Process.Start(testpath);
                 return true;
             }
             catch (Exception ex) { MessageBox.Show("Ошибка, попробуйте еще раз!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error); }

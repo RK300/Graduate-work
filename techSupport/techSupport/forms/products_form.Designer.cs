@@ -30,6 +30,7 @@
         {
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.login_textBox = new System.Windows.Forms.TextBox();
@@ -38,7 +39,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -79,6 +79,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Продукт";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(7, 114);
+            this.richTextBox1.MaxLength = 200;
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(762, 96);
+            this.richTextBox1.TabIndex = 55;
+            this.richTextBox1.Text = "";
+            // 
             // iconPictureBox1
             // 
             this.iconPictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -98,7 +107,6 @@
             // comboBox6
             // 
             this.comboBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
-            this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBox6.Font = new System.Drawing.Font("Jost", 9.75F);
             this.comboBox6.FormattingEnabled = true;
@@ -110,6 +118,7 @@
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(763, 27);
             this.comboBox6.TabIndex = 47;
+            this.comboBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox6_KeyPress);
             // 
             // login_textBox
             // 
@@ -125,7 +134,6 @@
             // comboBox1
             // 
             this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBox1.Font = new System.Drawing.Font("Jost", 9.75F);
             this.comboBox1.FormattingEnabled = true;
@@ -133,6 +141,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(763, 27);
             this.comboBox1.TabIndex = 22;
+            this.comboBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox1_KeyPress);
             // 
             // label3
             // 
@@ -181,15 +190,6 @@
             this.label4.Size = new System.Drawing.Size(78, 23);
             this.label4.TabIndex = 3;
             this.label4.Text = "Название";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(7, 114);
-            this.richTextBox1.MaxLength = 200;
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(762, 96);
-            this.richTextBox1.TabIndex = 55;
-            this.richTextBox1.Text = "";
             // 
             // products_form
             // 

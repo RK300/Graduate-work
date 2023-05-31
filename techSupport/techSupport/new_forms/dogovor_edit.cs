@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using techSupport.edit_form;
 using techSupport.forms;
+using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace techSupport.new_forms
 {
@@ -173,6 +174,36 @@ namespace techSupport.new_forms
                 }
                 MessageBox.Show("Запись успешно добавлена!", "Успех!");
             }
+        }
+
+        private void comboBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ((ComboBox)(sender)).DroppedDown = true;
+            if ((char.IsControl(e.KeyChar)))
+                return;
+            string Str = ((ComboBox)(sender)).Text.Substring(0, ((ComboBox)(sender)).SelectionStart) + e.KeyChar;
+            int Index = ((ComboBox)(sender)).FindStringExact(Str);
+            if (Index == -1)
+                Index = ((ComboBox)(sender)).FindString(Str);
+            ((ComboBox)sender).SelectedIndex = Index;
+            ((ComboBox)(sender)).SelectionStart = Str.Length;
+            ((ComboBox)(sender)).SelectionLength = ((ComboBox)(sender)).Text.Length - ((ComboBox)(sender)).SelectionStart;
+            e.Handled = true;
+        }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ((ComboBox)(sender)).DroppedDown = true;
+            if ((char.IsControl(e.KeyChar)))
+                return;
+            string Str = ((ComboBox)(sender)).Text.Substring(0, ((ComboBox)(sender)).SelectionStart) + e.KeyChar;
+            int Index = ((ComboBox)(sender)).FindStringExact(Str);
+            if (Index == -1)
+                Index = ((ComboBox)(sender)).FindString(Str);
+            ((ComboBox)sender).SelectedIndex = Index;
+            ((ComboBox)(sender)).SelectionStart = Str.Length;
+            ((ComboBox)(sender)).SelectionLength = ((ComboBox)(sender)).Text.Length - ((ComboBox)(sender)).SelectionStart;
+            e.Handled = true;
         }
     }
 }

@@ -165,5 +165,20 @@ namespace techSupport.edit_form
             string regexPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
             return Regex.IsMatch(email, regexPattern);
         }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ((ComboBox)(sender)).DroppedDown = true;
+            if ((char.IsControl(e.KeyChar)))
+                return;
+            string Str = ((ComboBox)(sender)).Text.Substring(0, ((ComboBox)(sender)).SelectionStart) + e.KeyChar;
+            int Index = ((ComboBox)(sender)).FindStringExact(Str);
+            if (Index == -1)
+                Index = ((ComboBox)(sender)).FindString(Str);
+            ((ComboBox)sender).SelectedIndex = Index;
+            ((ComboBox)(sender)).SelectionStart = Str.Length;
+            ((ComboBox)(sender)).SelectionLength = ((ComboBox)(sender)).Text.Length - ((ComboBox)(sender)).SelectionStart;
+            e.Handled = true;
+        }
     }
 }

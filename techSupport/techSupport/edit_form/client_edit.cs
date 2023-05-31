@@ -73,7 +73,6 @@ namespace techSupport.edit_form
                 maskedTextBox4.Text = dataTable.Rows[0][9].ToString();
                 maskedTextBox2.Text = dataTable.Rows[0][10].ToString();
                 maskedTextBox3.Text = dataTable.Rows[0][11].ToString();
-
                 textBox9.Text = dataTable.Rows[0][12].ToString();
                 textBox10.Text = dataTable.Rows[0][13].ToString();
                 textBox11.Text = dataTable.Rows[0][14].ToString();
@@ -183,6 +182,36 @@ namespace techSupport.edit_form
                 textBox3.Select(0, textBox3.Text.Length);
                 MessageBox.Show("Введите корректный e-mail!", "Ошибка!");
             }
+        }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ((ComboBox)(sender)).DroppedDown = true;
+            if ((char.IsControl(e.KeyChar)))
+                return;
+            string Str = ((ComboBox)(sender)).Text.Substring(0, ((ComboBox)(sender)).SelectionStart) + e.KeyChar;
+            int Index = ((ComboBox)(sender)).FindStringExact(Str);
+            if (Index == -1)
+                Index = ((ComboBox)(sender)).FindString(Str);
+            ((ComboBox)sender).SelectedIndex = Index;
+            ((ComboBox)(sender)).SelectionStart = Str.Length;
+            ((ComboBox)(sender)).SelectionLength = ((ComboBox)(sender)).Text.Length - ((ComboBox)(sender)).SelectionStart;
+            e.Handled = true;
+        }
+
+        private void comboBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ((ComboBox)(sender)).DroppedDown = true;
+            if ((char.IsControl(e.KeyChar)))
+                return;
+            string Str = ((ComboBox)(sender)).Text.Substring(0, ((ComboBox)(sender)).SelectionStart) + e.KeyChar;
+            int Index = ((ComboBox)(sender)).FindStringExact(Str);
+            if (Index == -1)
+                Index = ((ComboBox)(sender)).FindString(Str);
+            ((ComboBox)sender).SelectedIndex = Index;
+            ((ComboBox)(sender)).SelectionStart = Str.Length;
+            ((ComboBox)(sender)).SelectionLength = ((ComboBox)(sender)).Text.Length - ((ComboBox)(sender)).SelectionStart;
+            e.Handled = true;
         }
     }
 }

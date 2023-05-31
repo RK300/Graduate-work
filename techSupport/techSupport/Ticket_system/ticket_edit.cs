@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Word;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -12,6 +13,7 @@ using System.Windows.Forms;
 using techSupport.edit_form;
 using techSupport.forms;
 using techSupport.new_forms;
+using DataTable = System.Data.DataTable;
 
 namespace techSupport.Ticket_system
 {
@@ -29,7 +31,7 @@ namespace techSupport.Ticket_system
             sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString);
             sqlConnection.Open();
             InitializeComponent();
-            combobox(comboBox1, "SELECT id, (surname + ' ' + name + ' ' + patronymic) AS [FIO] FROM [Clients]", "FIO", "id");
+            combobox(comboBox1, "SELECT id, (CompanyName + ' | ' + surname + ' ' + name + ' ' + patronymic) AS [FIO] FROM [Clients]", "FIO", "id");
             combobox(comboBox3, "SELECT id, (surname + ' ' + name + ' ' + patronymic) AS [FIO] FROM [Worker]", "FIO", "id");
             combobox(comboBox4, "SELECT id, name FROM [Type]", "name", "id");
             comboBox3.Enabled = false;
@@ -204,6 +206,147 @@ namespace techSupport.Ticket_system
                     }
                 }
                 MessageBox.Show("Запись успешно добавлена!", "Успех!");
+            }
+        }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ((ComboBox)(sender)).DroppedDown = true;
+            if ((char.IsControl(e.KeyChar)))
+                return;
+            string Str = ((ComboBox)(sender)).Text.Substring(0, ((ComboBox)(sender)).SelectionStart) + e.KeyChar;
+            int Index = ((ComboBox)(sender)).FindStringExact(Str);
+            if (Index == -1)
+                Index = ((ComboBox)(sender)).FindString(Str);
+            ((ComboBox)sender).SelectedIndex = Index;
+            ((ComboBox)(sender)).SelectionStart = Str.Length;
+            ((ComboBox)(sender)).SelectionLength = ((ComboBox)(sender)).Text.Length - ((ComboBox)(sender)).SelectionStart;
+            e.Handled = true;
+        }
+
+        private void comboBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ((ComboBox)(sender)).DroppedDown = true;
+            if ((char.IsControl(e.KeyChar)))
+                return;
+            string Str = ((ComboBox)(sender)).Text.Substring(0, ((ComboBox)(sender)).SelectionStart) + e.KeyChar;
+            int Index = ((ComboBox)(sender)).FindStringExact(Str);
+            if (Index == -1)
+                Index = ((ComboBox)(sender)).FindString(Str);
+            ((ComboBox)sender).SelectedIndex = Index;
+            ((ComboBox)(sender)).SelectionStart = Str.Length;
+            ((ComboBox)(sender)).SelectionLength = ((ComboBox)(sender)).Text.Length - ((ComboBox)(sender)).SelectionStart;
+            e.Handled = true;
+        }
+
+        private void comboBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ((ComboBox)(sender)).DroppedDown = true;
+            if ((char.IsControl(e.KeyChar)))
+                return;
+            string Str = ((ComboBox)(sender)).Text.Substring(0, ((ComboBox)(sender)).SelectionStart) + e.KeyChar;
+            int Index = ((ComboBox)(sender)).FindStringExact(Str);
+            if (Index == -1)
+                Index = ((ComboBox)(sender)).FindString(Str);
+            ((ComboBox)sender).SelectedIndex = Index;
+            ((ComboBox)(sender)).SelectionStart = Str.Length;
+            ((ComboBox)(sender)).SelectionLength = ((ComboBox)(sender)).Text.Length - ((ComboBox)(sender)).SelectionStart;
+            e.Handled = true;
+        }
+
+        private void comboBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ((ComboBox)(sender)).DroppedDown = true;
+            if ((char.IsControl(e.KeyChar)))
+                return;
+            string Str = ((ComboBox)(sender)).Text.Substring(0, ((ComboBox)(sender)).SelectionStart) + e.KeyChar;
+            int Index = ((ComboBox)(sender)).FindStringExact(Str);
+            if (Index == -1)
+                Index = ((ComboBox)(sender)).FindString(Str);
+            ((ComboBox)sender).SelectedIndex = Index;
+            ((ComboBox)(sender)).SelectionStart = Str.Length;
+            ((ComboBox)(sender)).SelectionLength = ((ComboBox)(sender)).Text.Length - ((ComboBox)(sender)).SelectionStart;
+            e.Handled = true;
+        }
+
+        private void comboBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ((ComboBox)(sender)).DroppedDown = true;
+            if ((char.IsControl(e.KeyChar)))
+                return;
+            string Str = ((ComboBox)(sender)).Text.Substring(0, ((ComboBox)(sender)).SelectionStart) + e.KeyChar;
+            int Index = ((ComboBox)(sender)).FindStringExact(Str);
+            if (Index == -1)
+                Index = ((ComboBox)(sender)).FindString(Str);
+            ((ComboBox)sender).SelectedIndex = Index;
+            ((ComboBox)(sender)).SelectionStart = Str.Length;
+            ((ComboBox)(sender)).SelectionLength = ((ComboBox)(sender)).Text.Length - ((ComboBox)(sender)).SelectionStart;
+            e.Handled = true;
+        }
+
+        private void comboBox6_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ((ComboBox)(sender)).DroppedDown = true;
+            if ((char.IsControl(e.KeyChar)))
+                return;
+            string Str = ((ComboBox)(sender)).Text.Substring(0, ((ComboBox)(sender)).SelectionStart) + e.KeyChar;
+            int Index = ((ComboBox)(sender)).FindStringExact(Str);
+            if (Index == -1)
+                Index = ((ComboBox)(sender)).FindString(Str);
+            ((ComboBox)sender).SelectedIndex = Index;
+            ((ComboBox)(sender)).SelectionStart = Str.Length;
+            ((ComboBox)(sender)).SelectionLength = ((ComboBox)(sender)).Text.Length - ((ComboBox)(sender)).SelectionStart;
+            e.Handled = true;
+        }
+
+        private void comboBox2_Leave(object sender, EventArgs e)
+        {
+            int client_id = (int)comboBox1.SelectedValue;
+            int prod_id = (int)comboBox2.SelectedValue;
+
+            DateTime DateTo;
+
+            string query = $"SELECT Treaty.id, Treaty.dateTo FROM Treaty WHERE Treaty.client = {client_id} AND Treaty.product = {prod_id} ORDER BY id DESC";
+            var connectionString = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString))
+            {
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+
+                if (dataTable.Rows.Count == 0)
+                {
+                    MessageBox.Show("Договора на сопровождение этого программного обеспечения нет!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                DateTo = (DateTime)dataTable.Rows[0][1];
+            }
+
+            DateTime NowDate = DateTime.Now;
+
+            string format = NowDate.ToString("d");
+            NowDate = Convert.ToDateTime(format);
+            format = DateTo.ToString("d");
+            DateTo = Convert.ToDateTime(format);
+
+            int CompareTo = DateTo.CompareTo(NowDate);
+
+            if (CompareTo < 0)
+            {
+                MessageBox.Show("Договора на сопровождение программного обеспечения просрочен!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (CompareTo == 0)
+            {
+                MessageBox.Show("Действия договора на сопровождение программного обеспечения заканчивается сегодня (" + DateTo.ToString("D") + ")", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (CompareTo > 0)
+            {
+                MessageBox.Show("Договора на сопровождение программного обеспечения действует до " + DateTo.ToString("D"), "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
             }
         }
     }
