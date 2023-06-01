@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
+using techSupport.Analytics;
 using techSupport.edit_form;
 using techSupport.edit_forms_two;
 using techSupport.view_form;
@@ -318,7 +319,7 @@ namespace techSupport.Ticket_system
                 {
                     //string query = $"SELECT Ticket.id, (Clients.surname + ' ' + Clients.name + ' ' + Clients.patronymic) AS [Клиент], Products.name AS [Продукт], (Worker.surname + ' ' + Worker.name + ' ' + Worker.patronymic) AS [Принявший сотрудник], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.description AS [Описание], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия], Ticket.actual_data AS [Фактическая дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.actual_data > Ticket.completion_data AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id AND Ticket.header + ' ' + Ticket.description + ' ' + Ticket.priority + ' ' + Ticket.status LIKE '%{textBox1.Text}%'";
                     //string query = $"SELECT Ticket.id, (Clients.surname + ' ' + Clients.name + ' ' + Clients.patronymic) AS [Клиент], Products.name AS [Продукт], (Worker.surname + ' ' + Worker.name + ' ' + Worker.patronymic) AS [Принявший сотрудник], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия], Ticket.actual_data AS [Фактическая дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.actual_data > Ticket.completion_data AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id AND Ticket.header + ' ' + Ticket.description + ' ' + Ticket.priority + ' ' + Ticket.status LIKE '%{textBox1.Text}%'";
-                    string query = $"SELECT Ticket.id, Clients.CompanyName AS [Клиент], Products.name AS [Продукт], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия], Ticket.actual_data AS [Фактическая дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.actual_data > Ticket.completion_data AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id AND Clients.CompanyName + ' ' + Products.name + ' ' + Type.name + ' ' + Ticket.header + ' ' + Ticket.description + ' ' + Ticket.priority + ' ' + Ticket.status LIKE '%{textBox1.Text}%'";
+                    string query = $"SELECT Ticket.id, Clients.CompanyName AS [Клиент], Products.name AS [Продукт], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия], Ticket.actual_data AS [Фактическая дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.completion_data < CAST('{DateTime.Now.ToString()}' AS DATETIME) AND Ticket.status != 'Закрыт' AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id AND Clients.CompanyName + ' ' + Products.name + ' ' + Type.name + ' ' + Ticket.header + ' ' + Ticket.description + ' ' + Ticket.priority + ' ' + Ticket.status LIKE '%{textBox1.Text}%'";
                     var connectionString = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
                     using (SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString))
                     {
@@ -735,7 +736,7 @@ namespace techSupport.Ticket_system
         {
             //string query = "SELECT Ticket.id, (Clients.surname + ' ' + Clients.name + ' ' + Clients.patronymic) AS [Клиент], Products.name AS [Продукт], (Worker.surname + ' ' + Worker.name + ' ' + Worker.patronymic) AS [Принявший сотрудник], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.description AS [Описание], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия], Ticket.actual_data AS [Фактическая дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.actual_data > Ticket.completion_data AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id";
             //string query = "SELECT Ticket.id, (Clients.surname + ' ' + Clients.name + ' ' + Clients.patronymic) AS [Клиент], Products.name AS [Продукт], (Worker.surname + ' ' + Worker.name + ' ' + Worker.patronymic) AS [Принявший сотрудник], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия], Ticket.actual_data AS [Фактическая дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.actual_data > Ticket.completion_data AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id";
-            string query = "SELECT Ticket.id, Clients.CompanyName AS [Клиент], Products.name AS [Продукт], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия], Ticket.actual_data AS [Фактическая дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.actual_data > Ticket.completion_data AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id";
+            string query = $"SELECT Ticket.id, Clients.CompanyName AS [Клиент], Products.name AS [Продукт], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.completion_data < CAST('{DateTime.Now.ToString()}' AS DATETIME) AND Ticket.status != 'Закрыт' AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id";
             var connectionString = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
             using (SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString))
             {
@@ -866,21 +867,21 @@ namespace techSupport.Ticket_system
                     {
                         for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
                         {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.PriorityLow;
                         }
                     }
                     if (this.dataGridView1.Rows[i].Cells["Приоритет"].Value.ToString() == "Средний")
                     {
                         for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
                         {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.PriorityMedium;
                         }
                     }
                     if (this.dataGridView1.Rows[i].Cells["Приоритет"].Value.ToString() == "Высокий")
                     {
                         for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
                         {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.PriorityHight;
                         }
                     }
                 }
@@ -892,7 +893,8 @@ namespace techSupport.Ticket_system
                 {
                     for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
                     {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.RedOverdue;
+                        this.dataGridView1.Rows[i].Cells[j].Style.ForeColor = Color.White;
                     }
                 }
             }
@@ -1118,6 +1120,12 @@ namespace techSupport.Ticket_system
                 dataGridView3.Columns[0].Visible = false;
                 dataGridView3.Columns[1].Visible = false;
             }
+        }
+
+        private void rjButton13_Click(object sender, EventArgs e)
+        {
+            Analytic analytic = new Analytic();
+            analytic.ShowDialog();
         }
     }
 }

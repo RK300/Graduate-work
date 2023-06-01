@@ -711,6 +711,7 @@
             this.rjButton13.Text = "Вывести";
             this.rjButton13.TextColor = System.Drawing.Color.White;
             this.rjButton13.UseVisualStyleBackColor = false;
+            this.rjButton13.Click += new System.EventHandler(this.rjButton13_Click);
             // 
             // ticket_form
             // 
