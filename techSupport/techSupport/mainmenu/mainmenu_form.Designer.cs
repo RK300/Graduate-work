@@ -33,7 +33,6 @@
             this.iconButton9 = new FontAwesome.Sharp.IconButton();
             this.iconButton8 = new FontAwesome.Sharp.IconButton();
             this.iconButton7 = new FontAwesome.Sharp.IconButton();
-            this.iconButton6 = new FontAwesome.Sharp.IconButton();
             this.iconButton5 = new FontAwesome.Sharp.IconButton();
             this.iconButton4 = new FontAwesome.Sharp.IconButton();
             this.iconButton3 = new FontAwesome.Sharp.IconButton();
@@ -93,7 +92,6 @@
             this.panelMenu.Controls.Add(this.iconButton9);
             this.panelMenu.Controls.Add(this.iconButton8);
             this.panelMenu.Controls.Add(this.iconButton7);
-            this.panelMenu.Controls.Add(this.iconButton6);
             this.panelMenu.Controls.Add(this.iconButton5);
             this.panelMenu.Controls.Add(this.iconButton4);
             this.panelMenu.Controls.Add(this.iconButton3);
@@ -118,7 +116,7 @@
             this.iconButton9.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton9.IconSize = 32;
             this.iconButton9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton9.Location = new System.Drawing.Point(0, 532);
+            this.iconButton9.Location = new System.Drawing.Point(0, 472);
             this.iconButton9.Name = "iconButton9";
             this.iconButton9.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.iconButton9.Size = new System.Drawing.Size(220, 60);
@@ -142,7 +140,7 @@
             this.iconButton8.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton8.IconSize = 32;
             this.iconButton8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton8.Location = new System.Drawing.Point(0, 472);
+            this.iconButton8.Location = new System.Drawing.Point(0, 412);
             this.iconButton8.Name = "iconButton8";
             this.iconButton8.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.iconButton8.Size = new System.Drawing.Size(220, 60);
@@ -166,7 +164,7 @@
             this.iconButton7.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton7.IconSize = 32;
             this.iconButton7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton7.Location = new System.Drawing.Point(0, 412);
+            this.iconButton7.Location = new System.Drawing.Point(0, 352);
             this.iconButton7.Name = "iconButton7";
             this.iconButton7.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.iconButton7.Size = new System.Drawing.Size(220, 60);
@@ -176,30 +174,6 @@
             this.iconButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton7.UseVisualStyleBackColor = true;
             this.iconButton7.Click += new System.EventHandler(this.iconButton7_Click);
-            // 
-            // iconButton6
-            // 
-            this.iconButton6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconButton6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.iconButton6.FlatAppearance.BorderSize = 0;
-            this.iconButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton6.Font = new System.Drawing.Font("Jost", 12F);
-            this.iconButton6.ForeColor = System.Drawing.Color.Gainsboro;
-            this.iconButton6.IconChar = FontAwesome.Sharp.IconChar.BookOpen;
-            this.iconButton6.IconColor = System.Drawing.Color.Gainsboro;
-            this.iconButton6.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton6.IconSize = 32;
-            this.iconButton6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton6.Location = new System.Drawing.Point(0, 352);
-            this.iconButton6.Name = "iconButton6";
-            this.iconButton6.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.iconButton6.Size = new System.Drawing.Size(220, 60);
-            this.iconButton6.TabIndex = 7;
-            this.iconButton6.Text = "Договора";
-            this.iconButton6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton6.UseVisualStyleBackColor = true;
-            this.iconButton6.Click += new System.EventHandler(this.iconButton6_Click);
             // 
             // iconButton5
             // 
@@ -598,19 +572,19 @@
             this.rjDropdownMenu4.MenuItemTextColor = System.Drawing.Color.White;
             this.rjDropdownMenu4.Name = "rjDropdownMenu3";
             this.rjDropdownMenu4.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.rjDropdownMenu4.Size = new System.Drawing.Size(181, 70);
+            this.rjDropdownMenu4.Size = new System.Drawing.Size(155, 48);
             // 
             // тикетыToolStripMenuItem
             // 
             this.тикетыToolStripMenuItem.Name = "тикетыToolStripMenuItem";
-            this.тикетыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.тикетыToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.тикетыToolStripMenuItem.Text = "Тикеты";
             this.тикетыToolStripMenuItem.Click += new System.EventHandler(this.тикетыToolStripMenuItem_Click);
             // 
             // типПроблемыToolStripMenuItem
             // 
             this.типПроблемыToolStripMenuItem.Name = "типПроблемыToolStripMenuItem";
-            this.типПроблемыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.типПроблемыToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.типПроблемыToolStripMenuItem.Text = "Тип проблемы";
             this.типПроблемыToolStripMenuItem.Click += new System.EventHandler(this.типПроблемыToolStripMenuItem_Click);
             // 
@@ -713,7 +687,6 @@
         private System.Windows.Forms.ToolStripMenuItem типПроблемыToolStripMenuItem;
         private System.Windows.Forms.Label label5;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox4;
-        private FontAwesome.Sharp.IconButton iconButton6;
         private RJCodeAdvance.RJControls.RJDropdownMenu rjDropdownMenu5;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;

@@ -646,19 +646,19 @@ namespace techSupport.Ticket_system
         private struct UIColors
         {
             //Статус - Открыт
-            public readonly static Color SpecGreen = Color.FromArgb(39, 174, 96);
+            public readonly static Color SpecGreen = Color.FromArgb(255, 205, 144);
             //Статус - В работе
-            public readonly static Color SpecYellow = Color.FromArgb(241, 196, 15);
+            public readonly static Color SpecYellow = Color.FromArgb(255, 183, 107);
             //Статус - Закрыт
-            public readonly static Color SpecRed = Color.FromArgb(231, 76, 60);
+            public readonly static Color SpecRed = Color.FromArgb(255, 166, 82);
             //Просроченная запись
-            public readonly static Color RedOverdue = Color.FromArgb(235, 47, 6);
+            public readonly static Color RedOverdue = Color.FromArgb(176, 166, 239);
             //Приоритет - Низкий
-            public readonly static Color PriorityLow = Color.FromArgb(9, 184, 62);
+            public readonly static Color PriorityLow = Color.FromArgb(203, 221, 181);
             //Приоритет - Средний
-            public readonly static Color PriorityMedium = Color.FromArgb(255, 252, 0);
+            public readonly static Color PriorityMedium = Color.FromArgb(168, 202, 126);
             //Приоритет - Высокий
-            public readonly static Color PriorityHight = Color.FromArgb(223, 32, 41);
+            public readonly static Color PriorityHight = Color.FromArgb(151, 183, 112);
         }
 
         private void RefreshTable2()
@@ -750,7 +750,6 @@ namespace techSupport.Ticket_system
                 for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
                 {
                     this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.RedOverdue;
-                    this.dataGridView1.Rows[i].Cells[j].Style.ForeColor = Color.White;
                 }
             }
 
@@ -894,7 +893,6 @@ namespace techSupport.Ticket_system
                     for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
                     {
                         this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.RedOverdue;
-                        this.dataGridView1.Rows[i].Cells[j].Style.ForeColor = Color.White;
                     }
                 }
             }
@@ -977,7 +975,7 @@ namespace techSupport.Ticket_system
                 var m_currentIndex = dataGridView1.CurrentCell.RowIndex;
                 RefreshTable();
                 rjRadioButton1.Checked = true;
-                MessageBox.Show("Продукт успешно добавлен!", "Успех!");
+                MessageBox.Show("Изображение успешно добавлен!", "Успех!");
 
                 if ((dataGridView1.Rows.Count - 1) < 0)
                 {
@@ -1124,7 +1122,7 @@ namespace techSupport.Ticket_system
 
         private void rjButton13_Click(object sender, EventArgs e)
         {
-            Analytic analytic = new Analytic();
+            Analytic analytic = new Analytic(UserId);
             analytic.ShowDialog();
         }
     }

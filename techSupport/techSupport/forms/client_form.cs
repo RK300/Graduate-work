@@ -289,7 +289,7 @@ namespace techSupport.forms
                 var m_currentIndex = dataGridView1.CurrentCell.RowIndex;
                 var s_currentIndex = dataGridView2.CurrentCell.RowIndex;
                 RefreshTable();
-                MessageBox.Show("Продукт успешно добавлен!", "Успех!");
+                MessageBox.Show("Договор успешно добавлен!", "Успех!");
                 if ((dataGridView1.Rows.Count - 1) < 0)
                 {
                     dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];

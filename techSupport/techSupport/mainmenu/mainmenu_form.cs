@@ -288,6 +288,13 @@ namespace techSupport.mainmenu
             OpenChildForm(new dogovor_form(), "Договора");
         }
 
+        /*
+        private void iconButton6_Click(object sender, EventArgs e)
+        {
+            ActivatedButton(sender, RgbColors.color2);
+            OpenChildForm(new dogovor_form(), "Договора");
+        }
+        */
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             OpenChildForm(new client_form(), "Клиенты");

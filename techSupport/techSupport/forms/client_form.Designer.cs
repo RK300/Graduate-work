@@ -55,8 +55,8 @@
             // 
             // rjButton1
             // 
-            this.rjButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
-            this.rjButton1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
+            this.rjButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton1.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton1.BorderRadius = 0;
             this.rjButton1.BorderSize = 0;
@@ -64,9 +64,9 @@
             this.rjButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rjButton1.Font = new System.Drawing.Font("Jost", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rjButton1.ForeColor = System.Drawing.Color.White;
-            this.rjButton1.Location = new System.Drawing.Point(1026, 67);
+            this.rjButton1.Location = new System.Drawing.Point(1026, 53);
             this.rjButton1.Name = "rjButton1";
-            this.rjButton1.Size = new System.Drawing.Size(106, 49);
+            this.rjButton1.Size = new System.Drawing.Size(106, 35);
             this.rjButton1.TabIndex = 2;
             this.rjButton1.Text = "Добавить";
             this.rjButton1.TextColor = System.Drawing.Color.White;
@@ -75,8 +75,8 @@
             // 
             // rjButton2
             // 
-            this.rjButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.rjButton2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.rjButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton2.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton2.BorderRadius = 0;
             this.rjButton2.BorderSize = 0;
@@ -84,9 +84,9 @@
             this.rjButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rjButton2.Font = new System.Drawing.Font("Jost", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rjButton2.ForeColor = System.Drawing.Color.White;
-            this.rjButton2.Location = new System.Drawing.Point(1026, 122);
+            this.rjButton2.Location = new System.Drawing.Point(1026, 94);
             this.rjButton2.Name = "rjButton2";
-            this.rjButton2.Size = new System.Drawing.Size(106, 49);
+            this.rjButton2.Size = new System.Drawing.Size(106, 35);
             this.rjButton2.TabIndex = 3;
             this.rjButton2.Text = "Изменить";
             this.rjButton2.TextColor = System.Drawing.Color.White;
@@ -95,8 +95,8 @@
             // 
             // rjButton3
             // 
-            this.rjButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
-            this.rjButton3.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
+            this.rjButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton3.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton3.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton3.BorderRadius = 0;
             this.rjButton3.BorderSize = 0;
@@ -104,9 +104,9 @@
             this.rjButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rjButton3.Font = new System.Drawing.Font("Jost", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rjButton3.ForeColor = System.Drawing.Color.White;
-            this.rjButton3.Location = new System.Drawing.Point(1026, 177);
+            this.rjButton3.Location = new System.Drawing.Point(1026, 135);
             this.rjButton3.Name = "rjButton3";
-            this.rjButton3.Size = new System.Drawing.Size(106, 49);
+            this.rjButton3.Size = new System.Drawing.Size(106, 35);
             this.rjButton3.TabIndex = 4;
             this.rjButton3.Text = "Удалить";
             this.rjButton3.TextColor = System.Drawing.Color.White;
@@ -115,8 +115,8 @@
             // 
             // rjButton4
             // 
-            this.rjButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.rjButton4.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.rjButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton4.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton4.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton4.BorderRadius = 0;
             this.rjButton4.BorderSize = 0;
@@ -124,9 +124,9 @@
             this.rjButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rjButton4.Font = new System.Drawing.Font("Jost", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rjButton4.ForeColor = System.Drawing.Color.White;
-            this.rjButton4.Location = new System.Drawing.Point(1026, 232);
+            this.rjButton4.Location = new System.Drawing.Point(1026, 176);
             this.rjButton4.Name = "rjButton4";
-            this.rjButton4.Size = new System.Drawing.Size(106, 49);
+            this.rjButton4.Size = new System.Drawing.Size(106, 35);
             this.rjButton4.TabIndex = 5;
             this.rjButton4.Text = "Просмотр";
             this.rjButton4.TextColor = System.Drawing.Color.White;
@@ -135,8 +135,8 @@
             // 
             // rjButton5
             // 
-            this.rjButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.rjButton5.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.rjButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton5.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton5.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton5.BorderRadius = 0;
             this.rjButton5.BorderSize = 0;
@@ -146,7 +146,7 @@
             this.rjButton5.ForeColor = System.Drawing.Color.White;
             this.rjButton5.Location = new System.Drawing.Point(1026, 12);
             this.rjButton5.Name = "rjButton5";
-            this.rjButton5.Size = new System.Drawing.Size(106, 49);
+            this.rjButton5.Size = new System.Drawing.Size(106, 35);
             this.rjButton5.TabIndex = 6;
             this.rjButton5.Text = "Найти";
             this.rjButton5.TextColor = System.Drawing.Color.White;
@@ -182,8 +182,8 @@
             // 
             // rjButton6
             // 
-            this.rjButton6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
-            this.rjButton6.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
+            this.rjButton6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton6.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton6.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton6.BorderRadius = 0;
             this.rjButton6.BorderSize = 0;
@@ -202,8 +202,8 @@
             // 
             // rjButton7
             // 
-            this.rjButton7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.rjButton7.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.rjButton7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton7.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton7.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton7.BorderRadius = 0;
             this.rjButton7.BorderSize = 0;
@@ -222,8 +222,8 @@
             // 
             // rjButton8
             // 
-            this.rjButton8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
-            this.rjButton8.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
+            this.rjButton8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton8.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton8.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton8.BorderRadius = 0;
             this.rjButton8.BorderSize = 0;
@@ -242,8 +242,8 @@
             // 
             // rjButton9
             // 
-            this.rjButton9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
-            this.rjButton9.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
+            this.rjButton9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton9.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton9.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton9.BorderRadius = 0;
             this.rjButton9.BorderSize = 0;
@@ -262,8 +262,8 @@
             // 
             // rjButton10
             // 
-            this.rjButton10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.rjButton10.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.rjButton10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton10.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton10.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton10.BorderRadius = 0;
             this.rjButton10.BorderSize = 0;
@@ -282,8 +282,8 @@
             // 
             // rjButton11
             // 
-            this.rjButton11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
-            this.rjButton11.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
+            this.rjButton11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton11.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton11.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton11.BorderRadius = 0;
             this.rjButton11.BorderSize = 0;
@@ -353,8 +353,8 @@
             // 
             // rjButton12
             // 
-            this.rjButton12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.rjButton12.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.rjButton12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton12.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton12.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton12.BorderRadius = 0;
             this.rjButton12.BorderSize = 0;
@@ -373,8 +373,8 @@
             // 
             // rjButton13
             // 
-            this.rjButton13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.rjButton13.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.rjButton13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
+            this.rjButton13.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(100)))), ((int)(((byte)(41)))));
             this.rjButton13.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rjButton13.BorderRadius = 0;
             this.rjButton13.BorderSize = 0;

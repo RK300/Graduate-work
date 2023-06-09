@@ -1,5 +1,7 @@
 ﻿using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Office2010.Excel;
+using Newtonsoft.Json;
+using SettingsClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +11,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -19,9 +22,11 @@ namespace techSupport.Analytics
     public partial class Analytic : Form
     {
         private SqlConnection sqlConnection = null;
+        private int WorkerId;
 
-        public Analytic()
+        public Analytic(int id)
         {
+            SetId(id);
             sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString);
             sqlConnection.Open();
             InitializeComponent();
@@ -29,6 +34,38 @@ namespace techSupport.Analytics
             combobox(comboBox2, "SELECT Products.id, Products.name FROM [Products]", "name", "id");
             combobox(comboBox3, "SELECT id, (surname + ' ' + name + ' ' + patronymic) AS [FIO] FROM [Worker]", "FIO", "id");
         }
+
+        private string GetWorkerName() 
+        {
+            string query = $"SELECT (surname + ' ' + name + ' ' + patronymic) FROM Worker WHERE id = {WorkerId}";
+            var connectionString = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString))
+            {
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                return dataTable.Rows[0][0].ToString();
+            }
+        }
+
+        private string GetMyCompany()
+        {
+            var settings = File.Exists("settings.json") ? JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json")) : new Settings
+            {
+                FIO = "Иванов Иван Иванович",
+                NazvComp = "УП 'ИВЦ-ТЕСТ'",
+                RascSchet = "BY12BAPB25125674500100000000",
+                Bank = "ОАО «Белагропромбанк» г.Молодечно BAPBBY2X",
+                Adress = "г. Молодечно",
+                YNP = "600021518",
+                OKPO = "05552555"
+            };
+
+            File.WriteAllText("settings.json", JsonConvert.SerializeObject(settings));
+
+            return settings.NazvComp;
+        }
+
+        private void SetId(int id) { WorkerId = id; }
 
         private void combobox(ComboBox c, string query, string displaymember, string valuemember)
         {
@@ -166,6 +203,22 @@ namespace techSupport.Analytics
                 worksheet.Cell("I4").Style.Font.FontName = "Times New Roman";
                 worksheet.Cell("I4").Style.Font.FontSize = 16;
                 worksheet.Range("I4:K4").Merge();
+
+                worksheet.Cell("A4").Value = "Сформировал: " + GetInitials(GetWorkerName());
+                worksheet.Cell("A4").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                worksheet.Cell("A4").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                worksheet.Cell("A4").Style.Font.Bold = true;
+                worksheet.Cell("A4").Style.Font.FontName = "Times New Roman";
+                worksheet.Cell("A4").Style.Font.FontSize = 16;
+                worksheet.Range("A4:C4").Merge();
+
+                worksheet.Cell("E4").Value = GetMyCompany();
+                worksheet.Cell("E4").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                worksheet.Cell("E4").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                worksheet.Cell("E4").Style.Font.Bold = true;
+                worksheet.Cell("E4").Style.Font.FontName = "Times New Roman";
+                worksheet.Cell("E4").Style.Font.FontSize = 16;
+                worksheet.Range("E4:F4").Merge();
 
                 worksheet.Row(1).Height = worksheet.Row(1).Height * 1.5;
                 worksheet.Row(2).Height = worksheet.Row(2).Height * 1.5;
@@ -443,16 +496,27 @@ namespace techSupport.Analytics
 
                 //worksheet.Columns().AdjustToContents();
 
-                try 
+                saveFileDialog1.Filter = "Microsoft Excel Files (*.xlsx)|*.xlsx";
+                saveFileDialog1.FileName = filename;
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    workbook.SaveAs(filename);
+                    try
+                    {
+                        string filename2 = saveFileDialog1.FileName;
+                        workbook.SaveAs(filename2);
+                        System.Diagnostics.Process.Start(filename2);
+                        MessageBox.Show("Отчет сформирован!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Файл уже существует или произошла другая ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("Файл уже существует или произошла другая ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Вы отменили сохранение!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-
-                MessageBox.Show("Отчет сформирован, файл находится в папке с программой", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -520,7 +584,7 @@ namespace techSupport.Analytics
                 worksheet.Cell("A1").Style.Font.FontSize = 16;
                 worksheet.Range("A1:K1").Merge();
 
-                string Shapka = "Тикеты " + CompanyName;
+                string Shapka = "Все тикеты клиента - " + CompanyName;
 
                 worksheet.Cell("A2").Value = Shapka;
                 worksheet.Cell("A2").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
@@ -553,6 +617,22 @@ namespace techSupport.Analytics
                 worksheet.Row(1).Height = worksheet.Row(1).Height * 1.5;
                 worksheet.Row(2).Height = worksheet.Row(2).Height * 1.5;
                 worksheet.Row(3).Height = worksheet.Row(3).Height * 1.5;
+
+                worksheet.Cell("A4").Value = "Сформировал: " + GetInitials(GetWorkerName());
+                worksheet.Cell("A4").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                worksheet.Cell("A4").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                worksheet.Cell("A4").Style.Font.Bold = true;
+                worksheet.Cell("A4").Style.Font.FontName = "Times New Roman";
+                worksheet.Cell("A4").Style.Font.FontSize = 16;
+                worksheet.Range("A4:C4").Merge();
+
+                worksheet.Cell("E4").Value = GetMyCompany();
+                worksheet.Cell("E4").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                worksheet.Cell("E4").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                worksheet.Cell("E4").Style.Font.Bold = true;
+                worksheet.Cell("E4").Style.Font.FontName = "Times New Roman";
+                worksheet.Cell("E4").Style.Font.FontSize = 16;
+                worksheet.Range("E4:F4").Merge();
 
                 //worksheet.Rows().AdjustToContents();
                 //worksheet.Columns().AdjustToContents();
@@ -825,16 +905,27 @@ namespace techSupport.Analytics
 
                 //worksheet.Columns().AdjustToContents();
 
-                try
+                saveFileDialog1.Filter = "Microsoft Excel Files (*.xlsx)|*.xlsx";
+                saveFileDialog1.FileName = filename;
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    workbook.SaveAs(filename);
+                    try
+                    {
+                        string filename2 = saveFileDialog1.FileName;
+                        workbook.SaveAs(filename2);
+                        System.Diagnostics.Process.Start(filename2);
+                        MessageBox.Show("Отчет сформирован!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Файл уже существует или произошла другая ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("Файл уже существует или произошла другая ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Вы отменили сохранение!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-
-                MessageBox.Show("Отчет сформирован, файл находится в папке с программой", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -940,6 +1031,22 @@ namespace techSupport.Analytics
                 worksheet.Row(1).Height = worksheet.Row(1).Height * 1.5;
                 worksheet.Row(2).Height = worksheet.Row(2).Height * 1.5;
                 worksheet.Row(3).Height = worksheet.Row(3).Height * 1.5;
+
+                worksheet.Cell("A4").Value = "Сформировал: " + GetInitials(GetWorkerName());
+                worksheet.Cell("A4").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                worksheet.Cell("A4").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                worksheet.Cell("A4").Style.Font.Bold = true;
+                worksheet.Cell("A4").Style.Font.FontName = "Times New Roman";
+                worksheet.Cell("A4").Style.Font.FontSize = 16;
+                worksheet.Range("A4:C4").Merge();
+
+                worksheet.Cell("E4").Value = GetMyCompany();
+                worksheet.Cell("E4").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                worksheet.Cell("E4").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                worksheet.Cell("E4").Style.Font.Bold = true;
+                worksheet.Cell("E4").Style.Font.FontName = "Times New Roman";
+                worksheet.Cell("E4").Style.Font.FontSize = 16;
+                worksheet.Range("E4:F4").Merge();
 
                 //worksheet.Rows().AdjustToContents();
                 //worksheet.Columns().AdjustToContents();
@@ -1212,17 +1319,27 @@ namespace techSupport.Analytics
 
                 //worksheet.Columns().AdjustToContents();
 
-                try
+                saveFileDialog1.Filter = "Microsoft Excel Files (*.xlsx)|*.xlsx";
+                saveFileDialog1.FileName = filename;
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    workbook.SaveAs(filename);
+                    try
+                    {
+                        string filename2 = saveFileDialog1.FileName;
+                        workbook.SaveAs(filename2);
+                        System.Diagnostics.Process.Start(filename2);
+                        MessageBox.Show("Отчет сформирован!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Файл уже существует или произошла другая ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("Файл уже существует или произошла другая ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Вы отменили сохранение!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-                MessageBox.Show("Отчет сформирован, файл находится в папке с программой", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
         public static string FixInvalidChars(StringBuilder text, char replaceTo)
@@ -1352,6 +1469,22 @@ namespace techSupport.Analytics
                 worksheet.Row(1).Height = worksheet.Row(1).Height * 1.5;
                 worksheet.Row(2).Height = worksheet.Row(2).Height * 1.5;
                 worksheet.Row(3).Height = worksheet.Row(3).Height * 1.5;
+
+                worksheet.Cell("A4").Value = "Сформировал: " + GetInitials(GetWorkerName());
+                worksheet.Cell("A4").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                worksheet.Cell("A4").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                worksheet.Cell("A4").Style.Font.Bold = true;
+                worksheet.Cell("A4").Style.Font.FontName = "Times New Roman";
+                worksheet.Cell("A4").Style.Font.FontSize = 16;
+                worksheet.Range("A4:C4").Merge();
+
+                worksheet.Cell("E4").Value = GetMyCompany();
+                worksheet.Cell("E4").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                worksheet.Cell("E4").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                worksheet.Cell("E4").Style.Font.Bold = true;
+                worksheet.Cell("E4").Style.Font.FontName = "Times New Roman";
+                worksheet.Cell("E4").Style.Font.FontSize = 16;
+                worksheet.Range("E4:F4").Merge();
 
                 //worksheet.Rows().AdjustToContents();
                 //worksheet.Columns().AdjustToContents();
@@ -1624,17 +1757,27 @@ namespace techSupport.Analytics
 
                 //worksheet.Columns().AdjustToContents();
 
-                try
+                saveFileDialog1.Filter = "Microsoft Excel Files (*.xlsx)|*.xlsx";
+                saveFileDialog1.FileName = filename;
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    workbook.SaveAs(filename);
+                    try
+                    {
+                        string filename2 = saveFileDialog1.FileName;
+                        workbook.SaveAs(filename2);
+                        System.Diagnostics.Process.Start(filename2);
+                        MessageBox.Show("Отчет сформирован!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Файл уже существует или произошла другая ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("Файл уже существует или произошла другая ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Вы отменили сохранение!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-                MessageBox.Show("Отчет сформирован, файл находится в папке с программой", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
