@@ -52,30 +52,33 @@ namespace techSupport.Ticket_system
 
             dataGridView1.Columns[0].Visible = false;
 
-            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+            if ( checkBox1.Checked == true ) 
             {
-                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
+                for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
                 {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
                     {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                        }
+                    }
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
+                    {
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                        }
+                    }
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                    {
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                        }
                     }
                 }
-                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
-                {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
-                    {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
-                    }
-                }
-                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
-                {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
-                    {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
-                    }
-                }
-            }
+            } 
         }
 
         private void rjButton1_Click(object sender, EventArgs e)
@@ -510,24 +513,27 @@ namespace techSupport.Ticket_system
             {
                 RefreshTable();
 
-                label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
-                pictureBox6.Visible = false; pictureBox5.Visible = false;
+                if ( checkBox1.Checked == true ) 
+                {
+                    label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
+                    pictureBox6.Visible = false; pictureBox5.Visible = false;
 
-                label5.Visible = false;
-                label4.Visible = true; label3.Visible = true; label2.Visible = true; label1.Visible = true;
-                pictureBox4.Visible = true; pictureBox3.Visible = true; pictureBox2.Visible = true; pictureBox1.Visible = true;
+                    label5.Visible = false;
+                    label4.Visible = true; label3.Visible = true; label2.Visible = true; label1.Visible = true;
+                    pictureBox4.Visible = true; pictureBox3.Visible = true; pictureBox2.Visible = true; pictureBox1.Visible = true;
 
-                label4.Text = "Выбранная запись";
-                pictureBox4.BackColor = SystemColors.Highlight;
+                    label4.Text = "Выбранная запись";
+                    pictureBox4.BackColor = SystemColors.Highlight;
 
-                label3.Text = "Статус - \"Открыт\"";
-                pictureBox3.BackColor = UIColors.SpecGreen;
+                    label3.Text = "Статус - \"Открыт\"";
+                    pictureBox3.BackColor = UIColors.SpecGreen;
 
-                label1.Text = "Статус - \"В работе\"";
-                pictureBox1.BackColor = UIColors.SpecYellow;
+                    label1.Text = "Статус - \"В работе\"";
+                    pictureBox1.BackColor = UIColors.SpecYellow;
 
-                label2.Text = "Статус - \"Закрыт\"";
-                pictureBox2.BackColor = UIColors.SpecRed;
+                    label2.Text = "Статус - \"Закрыт\"";
+                    pictureBox2.BackColor = UIColors.SpecRed;
+                }
             }
         }
 
@@ -546,27 +552,30 @@ namespace techSupport.Ticket_system
             }
             dataGridView1.Columns[0].Visible = false;
 
-            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+            if ( checkBox1.Checked == true ) 
             {
-                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
+                for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
                 {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
                     {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                        }
                     }
-                }
-                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
-                {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
                     {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                        }
                     }
-                }
-                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
-                {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
                     {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                        }
                     }
                 }
             }
@@ -578,21 +587,24 @@ namespace techSupport.Ticket_system
             {
                 RefreshTable4();
 
-                label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
-                pictureBox6.Visible = false; pictureBox5.Visible = false;
+                if ( checkBox1.Checked == true ) 
+                {
+                    label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
+                    pictureBox6.Visible = false; pictureBox5.Visible = false;
 
-                label5.Visible = false;
-                label4.Visible = true; label3.Visible = false; label2.Visible = true; label1.Visible = true;
-                pictureBox4.Visible = true; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
+                    label5.Visible = false;
+                    label4.Visible = true; label3.Visible = false; label2.Visible = true; label1.Visible = true;
+                    pictureBox4.Visible = true; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
 
-                label4.Text = "Выбранная запись";
-                pictureBox4.BackColor = SystemColors.Highlight;
+                    label4.Text = "Выбранная запись";
+                    pictureBox4.BackColor = SystemColors.Highlight;
 
-                label2.Text = "Статус - \"Открыт\"";
-                pictureBox2.BackColor = UIColors.SpecGreen;
+                    label2.Text = "Статус - \"Открыт\"";
+                    pictureBox2.BackColor = UIColors.SpecGreen;
 
-                label1.Text = "Статус - \"В работе\"";
-                pictureBox1.BackColor = UIColors.SpecYellow;
+                    label1.Text = "Статус - \"В работе\"";
+                    pictureBox1.BackColor = UIColors.SpecYellow;
+                }
             }
         }
 
@@ -610,13 +622,16 @@ namespace techSupport.Ticket_system
             }
             dataGridView1.Columns[0].Visible = false;
 
-            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+            if ( checkBox1.Checked == true ) 
             {
-                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
                 {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
                     {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                        }
                     }
                 }
             }
@@ -628,18 +643,21 @@ namespace techSupport.Ticket_system
             {
                 RefreshTable5();
 
-                label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
-                pictureBox6.Visible = false; pictureBox5.Visible = false;
+                if ( checkBox1.Checked == true ) 
+                {
+                    label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
+                    pictureBox6.Visible = false; pictureBox5.Visible = false;
 
-                label5.Visible = false;
-                label4.Visible = false; label3.Visible = false; label2.Visible = true; label1.Visible = true;
-                pictureBox4.Visible = false; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
+                    label5.Visible = false;
+                    label4.Visible = false; label3.Visible = false; label2.Visible = true; label1.Visible = true;
+                    pictureBox4.Visible = false; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
 
-                label1.Text = "Выбранная запись";
-                pictureBox1.BackColor = SystemColors.Highlight;
+                    label1.Text = "Выбранная запись";
+                    pictureBox1.BackColor = SystemColors.Highlight;
 
-                label2.Text = "Статус - \"Закрыт\"";
-                pictureBox2.BackColor = UIColors.SpecRed;
+                    label2.Text = "Статус - \"Закрыт\"";
+                    pictureBox2.BackColor = UIColors.SpecRed;
+                }
             }
         }
 
@@ -675,190 +693,7 @@ namespace techSupport.Ticket_system
                 dataGridView1.DataSource = dataTable;
             }
 
-            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
-            {
-                if (this.dataGridView1.Rows[i].Cells["Приоритет"].Value.ToString() == "Низкий")
-                {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++) 
-                    {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.PriorityLow;
-                    }
-                }
-                if (this.dataGridView1.Rows[i].Cells["Приоритет"].Value.ToString() == "Средний")
-                {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
-                    {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.PriorityMedium;
-                    }
-                }
-                if (this.dataGridView1.Rows[i].Cells["Приоритет"].Value.ToString() == "Высокий")
-                {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
-                    {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.PriorityHight;
-                    }
-                }
-            }
-
-            dataGridView1.Columns[0].Visible = false;
-        }
-
-        private void rjRadioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rjRadioButton2.Checked)
-            {
-                RefreshTable2();
-
-                label6.Visible = true; label7.Visible = true; label8.Visible = true; label9.Visible = true;
-                pictureBox6.Visible = true; pictureBox5.Visible = true;
-
-                label5.Visible = false;
-                label4.Visible = false; label3.Visible = false; label2.Visible = false; label1.Visible = false;
-                pictureBox4.Visible = false; pictureBox3.Visible = false;
-
-                pictureBox2.Visible = true; pictureBox1.Visible = true;
-
-                label9.Text = "Выбранная запись";
-                pictureBox6.BackColor = SystemColors.Highlight;
-
-                label6.Text = "Приоритет - \"Низкий\"";
-                pictureBox5.BackColor = UIColors.PriorityLow;
-
-                label7.Text = "Приоритет - \"Средний\"";
-                pictureBox1.BackColor = UIColors.PriorityMedium;
-
-                label8.Text = "Приоритет - \"Высокий\"";
-                pictureBox2.BackColor = UIColors.PriorityHight;
-            }
-        }
-
-        private void RefreshTable3()
-        {
-            //string query = "SELECT Ticket.id, (Clients.surname + ' ' + Clients.name + ' ' + Clients.patronymic) AS [Клиент], Products.name AS [Продукт], (Worker.surname + ' ' + Worker.name + ' ' + Worker.patronymic) AS [Принявший сотрудник], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.description AS [Описание], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия], Ticket.actual_data AS [Фактическая дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.actual_data > Ticket.completion_data AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id";
-            //string query = "SELECT Ticket.id, (Clients.surname + ' ' + Clients.name + ' ' + Clients.patronymic) AS [Клиент], Products.name AS [Продукт], (Worker.surname + ' ' + Worker.name + ' ' + Worker.patronymic) AS [Принявший сотрудник], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия], Ticket.actual_data AS [Фактическая дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.actual_data > Ticket.completion_data AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id";
-            string query = $"SELECT Ticket.id, Clients.CompanyName AS [Клиент], Products.name AS [Продукт], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.completion_data < CAST('{DateTime.Now.ToString()}' AS DATETIME) AND Ticket.status != 'Закрыт' AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id";
-            var connectionString = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
-            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString))
-            {
-                System.Data.DataTable dataTable = new System.Data.DataTable();
-                adapter.Fill(dataTable);
-                dataGridView1.DataSource = dataTable;
-            }
-
-            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
-            {
-                for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
-                {
-                    this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.RedOverdue;
-                }
-            }
-
-            dataGridView1.Columns[0].Visible = false;
-        }
-
-        private void rjRadioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rjRadioButton3.Checked)
-            {
-                RefreshTable3();
-
-                label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
-                pictureBox6.Visible = false; pictureBox5.Visible = false;
-
-                label4.Visible = false; label3.Visible = false; label2.Visible = false; label1.Visible = true;
-                pictureBox4.Visible = false; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
-
-                label1.Text = "Выбранная запись";
-                pictureBox1.BackColor = SystemColors.Highlight;
-
-                label5.Visible = true;
-                label5.Text = "Просроченная запись";
-                pictureBox2.BackColor = UIColors.RedOverdue;
-            }
-        }
-
-        private void ticket_form_Load(object sender, EventArgs e)
-        {
-            rjRadioButton1.Checked = true;
-            if (rjRadioButton1.Checked == true)
-            {
-                RefreshTable();
-            }
-        }
-
-        private void dataGridView1_Sorted(object sender, EventArgs e)
-        {
-            if (rjRadioButton1.Checked == true)
-            {
-                for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
-                {
-                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
-                    {
-                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
-                        {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
-                        }
-                    }
-                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
-                    {
-                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
-                        {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
-                        }
-                    }
-                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
-                    {
-                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
-                        {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
-                        }
-                    }
-                }
-            }
-
-            if (rjRadioButton4.Checked == true)
-            {
-                for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
-                {
-                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
-                    {
-                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
-                        {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
-                        }
-                    }
-                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
-                    {
-                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
-                        {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
-                        }
-                    }
-                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
-                    {
-                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
-                        {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
-                        }
-                    }
-                }
-            }
-
-            if (rjRadioButton5.Checked == true)
-            {
-                for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
-                {
-                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
-                    {
-                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
-                        {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
-                        }
-                    }
-                }
-            }
-
-            if (rjRadioButton2.Checked == true)
+            if ( checkBox1.Checked == true ) 
             {
                 for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
                 {
@@ -886,7 +721,55 @@ namespace techSupport.Ticket_system
                 }
             }
 
-            if (rjRadioButton3.Checked == true)
+            dataGridView1.Columns[0].Visible = false;
+        }
+
+        private void rjRadioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rjRadioButton2.Checked)
+            {
+                RefreshTable2();
+
+                if ( checkBox1.Checked == true ) 
+                {
+                    label6.Visible = true; label7.Visible = true; label8.Visible = true; label9.Visible = true;
+                    pictureBox6.Visible = true; pictureBox5.Visible = true;
+
+                    label5.Visible = false;
+                    label4.Visible = false; label3.Visible = false; label2.Visible = false; label1.Visible = false;
+                    pictureBox4.Visible = false; pictureBox3.Visible = false;
+
+                    pictureBox2.Visible = true; pictureBox1.Visible = true;
+
+                    label9.Text = "Выбранная запись";
+                    pictureBox6.BackColor = SystemColors.Highlight;
+
+                    label6.Text = "Приоритет - \"Низкий\"";
+                    pictureBox5.BackColor = UIColors.PriorityLow;
+
+                    label7.Text = "Приоритет - \"Средний\"";
+                    pictureBox1.BackColor = UIColors.PriorityMedium;
+
+                    label8.Text = "Приоритет - \"Высокий\"";
+                    pictureBox2.BackColor = UIColors.PriorityHight;
+                }
+            }
+        }
+
+        private void RefreshTable3()
+        {
+            //string query = "SELECT Ticket.id, (Clients.surname + ' ' + Clients.name + ' ' + Clients.patronymic) AS [Клиент], Products.name AS [Продукт], (Worker.surname + ' ' + Worker.name + ' ' + Worker.patronymic) AS [Принявший сотрудник], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.description AS [Описание], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия], Ticket.actual_data AS [Фактическая дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.actual_data > Ticket.completion_data AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id";
+            //string query = "SELECT Ticket.id, (Clients.surname + ' ' + Clients.name + ' ' + Clients.patronymic) AS [Клиент], Products.name AS [Продукт], (Worker.surname + ' ' + Worker.name + ' ' + Worker.patronymic) AS [Принявший сотрудник], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия], Ticket.actual_data AS [Фактическая дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.actual_data > Ticket.completion_data AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id";
+            string query = $"SELECT Ticket.id, Clients.CompanyName AS [Клиент], Products.name AS [Продукт], Type.name AS [Тип проблемы], Ticket.header AS [Заголовок], Ticket.priority AS [Приоритет], Ticket.status AS [Статус], Ticket.application_data AS [Дата подачи], Ticket.completion_data AS [Дата закрытия] FROM Ticket, Clients, Products, Worker, Type WHERE Ticket.completion_data < CAST('{DateTime.Now.ToString()}' AS DATETIME) AND Ticket.status != 'Закрыт' AND Ticket.client = Clients.id AND Ticket.product = Products.id AND Ticket.worker = Worker.id AND Ticket.type = Type.id";
+            var connectionString = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString))
+            {
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+                adapter.Fill(dataTable);
+                dataGridView1.DataSource = dataTable;
+            }
+
+            if ( checkBox1.Checked == true ) 
             {
                 for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
                 {
@@ -897,29 +780,181 @@ namespace techSupport.Ticket_system
                 }
             }
 
-            if (rjRadioButton6.Checked == true) 
+            dataGridView1.Columns[0].Visible = false;
+        }
+
+        private void rjRadioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rjRadioButton3.Checked)
             {
-                for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                RefreshTable3();
+
+                if ( checkBox1.Checked == true ) 
                 {
-                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
+                    label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
+                    pictureBox6.Visible = false; pictureBox5.Visible = false;
+
+                    label4.Visible = false; label3.Visible = false; label2.Visible = false; label1.Visible = true;
+                    pictureBox4.Visible = false; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
+
+                    label1.Text = "Выбранная запись";
+                    pictureBox1.BackColor = SystemColors.Highlight;
+
+                    label5.Visible = true;
+                    label5.Text = "Просроченная запись";
+                    pictureBox2.BackColor = UIColors.RedOverdue;
+                }
+            }
+        }
+
+        private void ticket_form_Load(object sender, EventArgs e)
+        {
+            rjRadioButton1.Checked = true;
+            if (rjRadioButton1.Checked == true)
+            {
+                RefreshTable();
+            }
+
+            checkBox1.Checked = true;
+        }
+
+        private void dataGridView1_Sorted(object sender, EventArgs e)
+        {
+            if ( checkBox1.Checked == true ) 
+            {
+                if (rjRadioButton1.Checked == true)
+                {
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
                     {
-                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
                         {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                            }
                         }
                     }
-                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
+                }
+
+                if (rjRadioButton4.Checked == true)
+                {
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
                     {
-                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
                         {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                            }
                         }
                     }
-                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                }
+
+                if (rjRadioButton5.Checked == true)
+                {
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                    {
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                            }
+                        }
+                    }
+                }
+
+                if (rjRadioButton2.Checked == true)
+                {
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                    {
+                        if (this.dataGridView1.Rows[i].Cells["Приоритет"].Value.ToString() == "Низкий")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.PriorityLow;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Приоритет"].Value.ToString() == "Средний")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.PriorityMedium;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Приоритет"].Value.ToString() == "Высокий")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.PriorityHight;
+                            }
+                        }
+                    }
+                }
+
+                if (rjRadioButton3.Checked == true)
+                {
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
                     {
                         for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
                         {
-                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.RedOverdue;
+                        }
+                    }
+                }
+
+                if (rjRadioButton6.Checked == true)
+                {
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                    {
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                            }
                         }
                     }
                 }
@@ -988,7 +1023,11 @@ namespace techSupport.Ticket_system
 
                     if ((dataGridView3.Rows.Count - 1) < 0)
                     {
-                        dataGridView3.CurrentCell = dataGridView3.Rows[0].Cells[2];
+                        try
+                        {
+                            dataGridView3.CurrentCell = dataGridView3.Rows[0].Cells[2];
+                        }
+                        catch { }
                     }
                     else
                     {
@@ -1044,27 +1083,30 @@ namespace techSupport.Ticket_system
             }
             dataGridView1.Columns[0].Visible = false;
 
-            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+            if ( checkBox1.Checked == true ) 
             {
-                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
+                for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
                 {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
                     {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                        }
                     }
-                }
-                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
-                {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
                     {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                        }
                     }
-                }
-                if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
-                {
-                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
                     {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                        }
                     }
                 }
             }
@@ -1076,21 +1118,24 @@ namespace techSupport.Ticket_system
             {
                 RefreshTable6();
                 
-                label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
-                pictureBox6.Visible = false; pictureBox5.Visible = false;
-                
-                label5.Visible = false;
-                label4.Visible = true; label3.Visible = false; label2.Visible = true; label1.Visible = true;
-                pictureBox4.Visible = true; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
-                
-                label4.Text = "Выбранная запись";
-                pictureBox4.BackColor = SystemColors.Highlight;
-                
-                label2.Text = "Статус - \"Открыт\"";
-                pictureBox2.BackColor = UIColors.SpecGreen;
-                
-                label1.Text = "Статус - \"В работе\"";
-                pictureBox1.BackColor = UIColors.SpecYellow;
+                if ( checkBox1.Checked == true ) 
+                {
+                    label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
+                    pictureBox6.Visible = false; pictureBox5.Visible = false;
+
+                    label5.Visible = false;
+                    label4.Visible = true; label3.Visible = false; label2.Visible = true; label1.Visible = true;
+                    pictureBox4.Visible = true; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
+
+                    label4.Text = "Выбранная запись";
+                    pictureBox4.BackColor = SystemColors.Highlight;
+
+                    label2.Text = "Статус - \"Открыт\"";
+                    pictureBox2.BackColor = UIColors.SpecGreen;
+
+                    label1.Text = "Статус - \"В работе\"";
+                    pictureBox1.BackColor = UIColors.SpecYellow;
+                }
             }
         }
 
@@ -1124,6 +1169,272 @@ namespace techSupport.Ticket_system
         {
             Analytic analytic = new Analytic(UserId);
             analytic.ShowDialog();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if ( checkBox1.Checked == true ) 
+            {
+                checkBox1.Text = "включено";
+
+                if (rjRadioButton1.Checked == true ) 
+                {
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                    {
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                            }
+                        }
+                    }
+
+                    label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
+                    pictureBox6.Visible = false; pictureBox5.Visible = false;
+
+                    label5.Visible = false;
+                    label4.Visible = true; label3.Visible = true; label2.Visible = true; label1.Visible = true;
+                    pictureBox4.Visible = true; pictureBox3.Visible = true; pictureBox2.Visible = true; pictureBox1.Visible = true;
+
+                    label4.Text = "Выбранная запись";
+                    pictureBox4.BackColor = SystemColors.Highlight;
+
+                    label3.Text = "Статус - \"Открыт\"";
+                    pictureBox3.BackColor = UIColors.SpecGreen;
+
+                    label1.Text = "Статус - \"В работе\"";
+                    pictureBox1.BackColor = UIColors.SpecYellow;
+
+                    label2.Text = "Статус - \"Закрыт\"";
+                    pictureBox2.BackColor = UIColors.SpecRed;
+                }
+
+                if (rjRadioButton4.Checked == true ) 
+                {
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                    {
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                            }
+                        }
+                    }
+
+                    label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
+                    pictureBox6.Visible = false; pictureBox5.Visible = false;
+
+                    label5.Visible = false;
+                    label4.Visible = true; label3.Visible = false; label2.Visible = true; label1.Visible = true;
+                    pictureBox4.Visible = true; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
+
+                    label4.Text = "Выбранная запись";
+                    pictureBox4.BackColor = SystemColors.Highlight;
+
+                    label2.Text = "Статус - \"Открыт\"";
+                    pictureBox2.BackColor = UIColors.SpecGreen;
+
+                    label1.Text = "Статус - \"В работе\"";
+                    pictureBox1.BackColor = UIColors.SpecYellow;
+                }
+
+                if (rjRadioButton5.Checked == true ) 
+                {
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                    {
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                            }
+                        }
+                    }
+
+                    label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
+                    pictureBox6.Visible = false; pictureBox5.Visible = false;
+
+                    label5.Visible = false;
+                    label4.Visible = false; label3.Visible = false; label2.Visible = true; label1.Visible = true;
+                    pictureBox4.Visible = false; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
+
+                    label1.Text = "Выбранная запись";
+                    pictureBox1.BackColor = SystemColors.Highlight;
+
+                    label2.Text = "Статус - \"Закрыт\"";
+                    pictureBox2.BackColor = UIColors.SpecRed;
+                }
+
+                if (rjRadioButton2.Checked == true) 
+                {
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                    {
+                        if (this.dataGridView1.Rows[i].Cells["Приоритет"].Value.ToString() == "Низкий")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.PriorityLow;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Приоритет"].Value.ToString() == "Средний")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.PriorityMedium;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Приоритет"].Value.ToString() == "Высокий")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.PriorityHight;
+                            }
+                        }
+                    }
+
+                    label6.Visible = true; label7.Visible = true; label8.Visible = true; label9.Visible = true;
+                    pictureBox6.Visible = true; pictureBox5.Visible = true;
+
+                    label5.Visible = false;
+                    label4.Visible = false; label3.Visible = false; label2.Visible = false; label1.Visible = false;
+                    pictureBox4.Visible = false; pictureBox3.Visible = false;
+
+                    pictureBox2.Visible = true; pictureBox1.Visible = true;
+
+                    label9.Text = "Выбранная запись";
+                    pictureBox6.BackColor = SystemColors.Highlight;
+
+                    label6.Text = "Приоритет - \"Низкий\"";
+                    pictureBox5.BackColor = UIColors.PriorityLow;
+
+                    label7.Text = "Приоритет - \"Средний\"";
+                    pictureBox1.BackColor = UIColors.PriorityMedium;
+
+                    label8.Text = "Приоритет - \"Высокий\"";
+                    pictureBox2.BackColor = UIColors.PriorityHight;
+                }
+
+                if (rjRadioButton3.Checked == true) 
+                {
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                    {
+                        for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                        {
+                            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.RedOverdue;
+                        }
+                    }
+
+                    label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
+                    pictureBox6.Visible = false; pictureBox5.Visible = false;
+
+                    label4.Visible = false; label3.Visible = false; label2.Visible = false; label1.Visible = true;
+                    pictureBox4.Visible = false; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
+
+                    label1.Text = "Выбранная запись";
+                    pictureBox1.BackColor = SystemColors.Highlight;
+
+                    label5.Visible = true;
+                    label5.Text = "Просроченная запись";
+                    pictureBox2.BackColor = UIColors.RedOverdue;
+                }
+
+                if (rjRadioButton6.Checked == true) 
+                {
+                    for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                    {
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Открыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecGreen;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "В работе")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecYellow;
+                            }
+                        }
+                        if (this.dataGridView1.Rows[i].Cells["Статус"].Value.ToString() == "Закрыт")
+                        {
+                            for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                            {
+                                this.dataGridView1.Rows[i].Cells[j].Style.BackColor = UIColors.SpecRed;
+                            }
+                        }
+                    }
+
+                    label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
+                    pictureBox6.Visible = false; pictureBox5.Visible = false;
+
+                    label5.Visible = false;
+                    label4.Visible = true; label3.Visible = false; label2.Visible = true; label1.Visible = true;
+                    pictureBox4.Visible = true; pictureBox3.Visible = false; pictureBox2.Visible = true; pictureBox1.Visible = true;
+
+                    label4.Text = "Выбранная запись";
+                    pictureBox4.BackColor = SystemColors.Highlight;
+
+                    label2.Text = "Статус - \"Открыт\"";
+                    pictureBox2.BackColor = UIColors.SpecGreen;
+
+                    label1.Text = "Статус - \"В работе\"";
+                    pictureBox1.BackColor = UIColors.SpecYellow;
+                }
+            }
+            
+            if ( checkBox1.Checked == false ) 
+            {
+                checkBox1.Text = "выключено";
+
+                label6.Visible = false; label7.Visible = false; label8.Visible = false; label9.Visible = false;
+                pictureBox6.Visible = false; pictureBox5.Visible = false;
+
+                label5.Visible = false;
+                label4.Visible = false; label3.Visible = false; label2.Visible = false; label1.Visible = true;
+                pictureBox4.Visible = false; pictureBox3.Visible = false; pictureBox2.Visible = false; pictureBox1.Visible = true;
+
+                label1.Text = "Выбранная запись";
+                pictureBox1.BackColor = SystemColors.Highlight;
+
+                for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                {
+                    for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++)
+                    {
+                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.White;
+                    }
+                }
+            }
         }
     }
 }

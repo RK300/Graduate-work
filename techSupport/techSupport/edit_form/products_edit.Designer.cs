@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(products_edit));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.rjButton5 = new RJCodeAdvance.RJControls.RJButton();
             this.rjButton3 = new RJCodeAdvance.RJControls.RJButton();
@@ -151,6 +152,7 @@
             this.Controls.Add(this.rjButton1);
             this.Controls.Add(this.dataGridView1);
             this.Font = new System.Drawing.Font("Jost", 8.249999F);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "products_edit";
             this.Text = "products_edit";

@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(client_form));
             this.rjButton1 = new RJCodeAdvance.RJControls.RJButton();
             this.rjButton2 = new RJCodeAdvance.RJControls.RJButton();
             this.rjButton3 = new RJCodeAdvance.RJControls.RJButton();
@@ -415,6 +416,7 @@
             this.Controls.Add(this.rjButton2);
             this.Controls.Add(this.rjButton1);
             this.Font = new System.Drawing.Font("Jost", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "client_form";
             this.Text = "client_form";
